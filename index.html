@@ -33,18 +33,9 @@
   <script type="text/javascript" src="./assets/js/app.js"></script>
   <script type="text/javascript" src="./assets/js/entities/contact.js"></script>
   <script type="text/javascript" src="./assets/js/apps/contacts/list/list_view.js"></script>
+  <script type="text/javascript" src="./assets/js/apps/contacts/list/list_controller.js"></script>
 
   <script type="text/javascript">
-    ContactManager.on('initialize:after', function(){
-      var contacts = ContactManager.request("contact:entities");
-
-      var contactsListView = new ContactManager.ContactsApp.List.Contacts({
-        collection: contacts
-      });
-
-      ContactManager.mainRegion.show(contactsListView);
-    });
-
     ContactManager.start();
   </script>
 </body>
