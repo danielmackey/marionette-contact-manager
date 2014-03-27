@@ -24,7 +24,7 @@
     <td><%- firstName %></td>
     <td><%- lastName %></td>
     <td>
-      <a href="#" class="btn btn-small js-show">
+      <a href="#contacts/<%- id %>" class="btn btn-small js-show">
         <i class="icon-eye-open"></i>
         Show
       </a>
@@ -49,6 +49,7 @@
   <script type="text/template" id="contact-view">
     <h1><%- firstName %> <%- lastName %></h1>
     <p><strong>Phone number:</strong> <%- phoneNumber %></p>
+    <a href="#contacts">Back to list</a>
   </script>
 
 
@@ -60,6 +61,7 @@
 
   <script type="text/javascript" src="./assets/js/app.js"></script>
   <script type="text/javascript" src="./assets/js/entities/contact.js"></script>
+  <script type="text/javascript" src="./assets/js/apps/contacts/contacts_app.js"></script>
   <script type="text/javascript" src="./assets/js/apps/contacts/list/list_view.js"></script>
   <script type="text/javascript" src="./assets/js/apps/contacts/list/list_controller.js"></script>
   <script type="text/javascript" src="./assets/js/apps/contacts/show/show_view.js"></script>
