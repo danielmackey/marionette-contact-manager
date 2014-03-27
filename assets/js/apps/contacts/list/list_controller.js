@@ -25,14 +25,8 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
 
         contactsListView.on("itemview:contact:edit", function(childView, model){
           var view = new ContactManager.ContactsApp.Edit.Contact({
-            model: model
-          });
-
-          view.on("show", function(){
-            this.$el.dialog({
-              modal: true,
-              width: "auto"
-            })
+            model: model,
+            asModal: true
           });
 
           ContactManager.dialogRegion.show(view);

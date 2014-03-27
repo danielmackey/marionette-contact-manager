@@ -3,6 +3,11 @@ ContactManager.module("ContactsApp.Edit", function(Edit, ContactManager, Backbon
   Edit.Contact = Marionette.ItemView.extend({
     template: '#contact-form',
 
+    initialize: function(){
+      this.title = "Edit " + this.model.get("firstName");
+      this.title += " " + this.model.get("lastName");
+    },
+
     events: {
       'click .js-submit': 'submitClicked'
     },
@@ -34,7 +39,25 @@ ContactManager.module("ContactsApp.Edit", function(Edit, ContactManager, Backbon
 
       clearFormErrors();
       _.each(errors, markErrors);
+    },
+
+    onRender: function(){
+      if ( ! this.options.asModal){
+        var $title = $('<h1>', { text: this.title });
+        this.$el.prepend($title);
+      }
+    },
+
+    onShow: function(){
+      if(this.options.asModal){
+        this.$el.dialog({
+          modal: true,
+          title: this.title,
+          width: "auto"
+        })
+      }
     }
+
   })
 
 })
