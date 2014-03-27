@@ -10,6 +10,7 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
 
     highlightName: function(e) {
       this.$el.toggleClass('warning');
+      this.trigger('contact:highlight', this.model);
     },
 
     deleteClicked: function(e) {
