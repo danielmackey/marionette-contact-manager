@@ -30,27 +30,10 @@
   <script type="text/javascript" src="./assets/js/vendor/backbone.js"></script>
   <script type="text/javascript" src="./assets/js/vendor/backbone.marionette.js"></script>
 
+  <script type="text/javascript" src="./assets/js/app.js"></script>
+  <script type="text/javascript" src="./assets/js/entities/contact.js"></script>
+
   <script type="text/javascript">
-    var ContactManager = new Marionette.Application();
-
-    ContactManager.addRegions({
-      mainRegion: '#main-region'
-    });
-
-    ContactManager.Contact = Backbone.Model.extend({
-      defaults: {
-        firstName: '',
-        phoneNumber: 'No phone number!'
-      }
-    });
-
-    ContactManager.ContactCollection = Backbone.Collection.extend({
-      model: ContactManager.Contact,
-      comparator: function(item){
-        return item.get('firstName') + item.get('lastName');
-      }
-    })
-
     ContactManager.ContactItemView = Marionette.ItemView.extend({
       tagName: 'li',
       template: '#contact-list-item'
@@ -62,24 +45,7 @@
     })
 
     ContactManager.on('initialize:after', function(){
-      var contacts = new ContactManager.ContactCollection([
-        {
-          firstName: 'Alice',
-          lastName: 'Tampen'
-        },{
-          firstName: 'Bob',
-          lastName: 'Brigham'
-        },{
-          firstName: 'Alice',
-          lastName: 'Artsy'
-        },{
-          firstName: 'Alice',
-          lastName: 'Arten'
-        },{
-          firstName: 'Charlie',
-          lastName: 'Campbell'
-        },
-      ]);
+      var contacts = new ContactManager.request('contact:entities');
 
       var contactsListView = new ContactManager.ContactsView({
         collection: contacts
