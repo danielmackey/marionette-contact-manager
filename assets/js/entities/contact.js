@@ -50,6 +50,9 @@ ContactManager.module("Entities", function(Entities, ContactManager, Backbone, M
         contact.fetch({
           success: function(data){
             defer.resolve(data);
+          },
+          error: function(data){
+            defer.resolve(undefined);
           }
         });
       }, 2000)
