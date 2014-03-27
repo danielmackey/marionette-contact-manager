@@ -32,22 +32,13 @@
 
   <script type="text/javascript" src="./assets/js/app.js"></script>
   <script type="text/javascript" src="./assets/js/entities/contact.js"></script>
+  <script type="text/javascript" src="./assets/js/apps/contacts/list/list_view.js"></script>
 
   <script type="text/javascript">
-    ContactManager.ContactItemView = Marionette.ItemView.extend({
-      tagName: 'li',
-      template: '#contact-list-item'
-    });
-
-    ContactManager.ContactsView = Marionette.CollectionView.extend({
-      tagName: 'ul',
-      itemView: ContactManager.ContactItemView
-    })
-
     ContactManager.on('initialize:after', function(){
-      var contacts = new ContactManager.request('contact:entities');
+      var contacts = ContactManager.request("contact:entities");
 
-      var contactsListView = new ContactManager.ContactsView({
+      var contactsListView = new ContactManager.ContactsApp.List.Contacts({
         collection: contacts
       });
 
