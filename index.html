@@ -25,5 +25,15 @@
   <script type="text/javascript" src="./assets/js/vendor/underscore.js"></script>
   <script type="text/javascript" src="./assets/js/vendor/backbone.js"></script>
   <script type="text/javascript" src="./assets/js/vendor/backbone.marionette.js"></script>
+
+  <script type="text/javascript">
+    var ContactManager = new Marionette.Application();
+
+    ContactManager.on('initialize:after', function(){
+      console.log("ContactManager has started!");
+    });
+
+    ContactManager.start();
+  </script>
 </body>
 </html>
