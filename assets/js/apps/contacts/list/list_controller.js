@@ -46,19 +46,20 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
           ContactManager.dialogRegion.show(view);
         });
 
-        contactsListView.on("itemview:contact:delete", function(childView, model){
-          model.destroy();
+        contactsListView.on("itemview:contact:delete", function(childView, args){
+          args.model.destroy();
         });
 
-        contactsListView.on("itemview:contact:highlight", function(childView, model){
-          console.log("Highlighting toggled on model: ", model);
+        contactsListView.on("itemview:contact:highlight", function(childView, args){
+          console.log("Highlighting toggled on model: ", args.model);
         });
 
-        contactsListView.on("itemview:contact:show", function(childView, model){
-          ContactManager.trigger("contact:show", model.get('id'))
+        contactsListView.on("itemview:contact:show", function(childView, args){
+          ContactManager.trigger("contact:show", args.model.get('id'))
         });
 
-        contactsListView.on("itemview:contact:edit", function(childView, model){
+        contactsListView.on("itemview:contact:edit", function(childView, args){
+          var model = args.model;
           var view = new ContactManager.ContactsApp.Edit.Contact({
             model: model,
             asModal: true

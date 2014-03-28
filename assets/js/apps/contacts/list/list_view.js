@@ -21,33 +21,19 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
     tagName: 'tr',
     template: '#contact-list-item',
 
+    triggers: {
+      'click button.js-delete': 'contact:delete',
+      'click a.js-show': 'contact:show',
+      'click .js-edit': 'contact:edit'
+    },
+
     events: {
-      'click': 'highlightName',
-      'click button.js-delete': 'deleteClicked',
-      'click a.js-show': 'showClicked',
-      'click .js-edit': 'editClicked'
+      'click': 'highlightName'
     },
 
     highlightName: function(e) {
       this.$el.toggleClass('warning');
       this.trigger('contact:highlight', this.model);
-    },
-
-    deleteClicked: function(e) {
-      e.stopPropagation();
-      this.trigger('contact:delete', this.model);
-    },
-
-    showClicked: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.trigger('contact:show', this.model);
-    },
-
-    editClicked: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.trigger("contact:edit", this.model);
     },
 
     remove: function() {
@@ -72,6 +58,20 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
     className: 'table table-hover',
     template: '#contact-list',
     itemView: List.Contact,
-    itemViewContainer: 'tbody'
+    itemViewContainer: 'tbody',
+
+    initialize: function(){
+      this.listenTo(this.collection, "reset", function(){
+        this.appendHtml = function(collectionView, itemView, index){
+          collectionView.$el.append(itemView.el)
+        }
+      });
+    },
+
+    onCompositeCollectionRendered: function(){
+      this.appendHtml = function(collectionView, itemView, index){
+        collectionView.$el.prepend(itemView.el);
+      }
+    }
   });
 });
