@@ -22,8 +22,7 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
         contactsListPanel.on("contact:new", function(){
           var newContact = new ContactManager.Entities.Contact();
           var view = new ContactManager.ContactsApp.New.Contact({
-            model: newContact,
-            asModal: true
+            model: newContact
           });
 
           view.on("form:submit", function(data){
@@ -36,7 +35,7 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
 
             if(newContact.save(data)){
               contacts.add(newContact);
-              ContactManager.dialogRegion.close();
+              view.trigger("dialog:close");
               contactsListView.children.findByModel(newContact).flash('success')
             } else {
               view.triggerMethod("form:data:invalid", newContact.validationError);
@@ -50,8 +49,8 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
           args.model.destroy();
         });
 
-        contactsListView.on("itemview:contact:highlight", function(childView, args){
-          console.log("Highlighting toggled on model: ", args.model);
+        contactsListView.on("itemview:contact:highlight", function(childView, model){
+          console.log("Highlighting toggled on model: ", model);
         });
 
         contactsListView.on("itemview:contact:show", function(childView, args){
@@ -61,14 +60,13 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
         contactsListView.on("itemview:contact:edit", function(childView, args){
           var model = args.model;
           var view = new ContactManager.ContactsApp.Edit.Contact({
-            model: model,
-            asModal: true
+            model: model
           });
 
           view.on("form:submit", function(data){
             if(model.save(data)) {
               childView.render();
-              ContactManager.dialogRegion.close();
+              view.trigger("dialog:close");
               childView.flash("success");
             } else {
               view.triggerMethod("form:data:invalid", model.validationError);
