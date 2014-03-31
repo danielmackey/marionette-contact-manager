@@ -25,6 +25,12 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
       var criterion = this.$('.js-filter-criterion').val();
       this.trigger('contacts:filter', criterion);
     }
+  });
+
+  var NoContactsView = Marionette.ItemView.extend({
+    template: '#contact-list-none',
+    tagName: 'tr',
+    className: 'alert'
   })
 
   List.Contact = Marionette.ItemView.extend({
@@ -67,6 +73,7 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
     tagName: 'table',
     className: 'table table-hover',
     template: '#contact-list',
+    emptyView: NoContactsView,
     itemView: List.Contact,
     itemViewContainer: 'tbody',
 
