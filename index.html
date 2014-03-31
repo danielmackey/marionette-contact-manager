@@ -9,19 +9,28 @@
 </head>
 <body>
 
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <span class="brand">Contact Manager</span>
-      </div>
-    </div>
-  </div>
+  <div id="header-region"></div>
 
   <div id="main-region" class="container">
     <p>Here is static content</p>
   </div>
 
   <div id="dialog-region" class="container"></div>
+
+  <script type="text/template" id="header-template">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#contacts">Contact Manager</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav"></ul>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/template" id="header-link">
+    <a href="#<%- url %>"><%- name %></a>
+  </script>
 
   <script type="text/template" id="contact-list-item">
     <td><%- firstName %></td>
@@ -134,6 +143,7 @@
   <script type="text/javascript" src="./assets/js/apps/config/storage/localstorage.js"></script>
   <script type="text/javascript" src="./assets/js/entities/common.js"></script>
   <script type="text/javascript" src="./assets/js/entities/contact.js"></script>
+  <script type="text/javascript" src="./assets/js/entities/header.js"></script>
   <script type="text/javascript" src="./assets/js/common/views.js"></script>
 
   <script type="text/javascript" src="./assets/js/apps/contacts/contacts_app.js"></script>
@@ -149,6 +159,10 @@
   <script type="text/javascript" src="./assets/js/apps/about/about_app.js"></script>
   <script type="text/javascript" src="./assets/js/apps/about/show/show_controller.js"></script>
   <script type="text/javascript" src="./assets/js/apps/about/show/show_view.js"></script>
+
+  <script type="text/javascript" src="./assets/js/apps/header/header_app.js"></script>
+  <script type="text/javascript" src="./assets/js/apps/header/list/list_controller.js"></script>
+  <script type="text/javascript" src="./assets/js/apps/header/list/list_view.js"></script>
 
   <script type="text/javascript">
     ContactManager.start();
