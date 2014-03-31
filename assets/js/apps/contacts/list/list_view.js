@@ -20,10 +20,18 @@ ContactManager.module('ContactsApp.List', function(List, ContactManager, Backbon
       'submit #filter-form': 'filterContacts'
     },
 
+    ui: {
+      criterion: '.js-filter-criterion'
+    },
+
     filterContacts: function(e){
       e.preventDefault();
-      var criterion = this.$('.js-filter-criterion').val();
+      var criterion = this.ui.criterion.val();
       this.trigger('contacts:filter', criterion);
+    },
+
+    setFilterCriterion: function(criterion){
+      this.ui.criterion.val(criterion);
     }
   });
 
